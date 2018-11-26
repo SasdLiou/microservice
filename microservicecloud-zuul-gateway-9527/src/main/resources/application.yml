@@ -1,0 +1,34 @@
+server: 
+  port: 9527
+ 
+spring: 
+  application:
+    name: microservicecloud-zuul-gateway
+ 
+eureka: 
+  client: 
+    service-url: 
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka  
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true 
+ 
+ 
+zuul:
+  #忽略原真实服务名(单个)
+  #ignored-services: microservicecloud-dept
+  #设置统一公共前缀
+  prefix: /aliyun
+  #忽略多个
+  ignored-services: "*"
+  routes:
+    #路由访问映射(代理名称)
+    mydept.serviceId: microservicecloud-dept
+    mydept.path: /mydept/**
+ 
+info:
+  app.name: aliyun-microcloud
+  company.name: www.aliyun.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
